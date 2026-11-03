@@ -45,9 +45,11 @@
 
 | 位置 | 事实 |
 | --- | --- |
-| `app.js:292` | 唯一的 PDF 入口 `getDocument({data:bytes})` —— 喂给它的是本地文件读出的字节，不是 URL |
+| `app.js:291` | 唯一的 PDF 入口 `getDocument({data:bytes})` —— 喂给它的是本地文件读出的字节，不是 URL（搜 `getDocument({data:`） |
 | `app.js` 全文 | 无 `fetch` / `XMLHttpRequest` / `WebSocket` / `sendBeacon`；出现的 `url:` 全是 `URL.createObjectURL()` 生成的内存 blob |
-| `main.js:31` | 数据目录钉在本机 `%APPDATA%\zhai-juan` |
+| `main.js:30` | 数据目录钉在本机 `%APPDATA%\zhai-juan`（搜 `setPath('userData'`） |
+
+自己 grep 会命中两类 `http` 字符串，它们都不是网络请求：`http://schemas.openxmlformats.org/…` 是写进 `.docx` 里的 XML 命名空间标识符（Word 文档规范的固定写法，只有 Word 打开文件时才去解释它）；`https://www.gnu.org/licenses/` 只出现在每个源码文件头的许可声明注释里。
 
 内置的 pdf.js 作为通用库保留了远程加载能力，但本软件不向它传 URL，这条路径走不到。最硬的验证方式：**拔网线或用它跑一天**，功能完全不受影响。
 
@@ -83,7 +85,7 @@ npx electron-packager . 阅卷助理 --platform=win32 --arch=x64 --icon=app.ico 
 3. 从 Releases 下新的 `阅卷助理-win32-x64.zip`，解压到一个新位置，双击 `阅卷助理.exe`。
 4. 打开后确认版本号和卷列表都在，就可以把旧的解压文件夹删掉。
 
-之所以能直接换：摘录和截图都存在 `%APPDATA%\zhai-juan`，软件把这个路径钉死在代码里（见 `main.js:31`），**跟 exe 放在哪、叫什么名无关**。旧文件夹里只有程序本身，没有你的数据。
+之所以能直接换：摘录和截图都存在 `%APPDATA%\zhai-juan`，软件把这个路径钉死在代码里（见 `main.js:30`），**跟 exe 放在哪、叫什么名无关**。旧文件夹里只有程序本身，没有你的数据。
 
 （菜单 **文件 → 备份数据…** 是只备份文字的快捷入口，导出 `.json`，不含截图；要连截图一起带走就用设置面板里的完整备份。）
 
