@@ -1,0 +1,23 @@
+# 依赖（用 npm install 还原，不要提交）
+node_modules/
+
+# 打包产物：体积超过 GitHub 单文件 100MB 限制，请传到 Releases 而不是仓库里
+release/
+dist/
+dist_old/
+dist_new/
+
+# 测试运行时生成的截图（脚本与合成演示卷本身是要提交的）
+.build/*.png
+
+# 本机数据与工作笔记
+.workbuddy/
+*.log
+*.tmp
+
+# 系统与编辑器
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/

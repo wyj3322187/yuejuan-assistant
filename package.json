@@ -1,0 +1,25 @@
+{
+  "name": "yuejuan-assistant",
+  "version": "1.0.0",
+  "productName": "阅卷助理",
+  "description": "阅卷助理 — 刑事卷宗阅卷摘录",
+  "main": "main.js",
+  "author": "杰森",
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wyj3322187/yuejuan-assistant.git"
+  },
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node .build/run_all.js",
+    "dist": "electron-packager . 阅卷助理 --platform=win32 --arch=x64 --icon=app.ico --overwrite --out=release"
+  },
+  "devDependencies": {
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "electron": "^30.0.0"
+  }
+}
